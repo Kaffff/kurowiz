@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { Fragment, useState } from "react";
 import {
     useTable,
@@ -53,7 +54,7 @@ const TableContainer = ({ columns, data }) => {
             defaultColumn: { Filter: DefaultColumnFilter },
             initialState: {
                 pageIndex: 0,
-                pageSize: 10,
+                pageSize: 20,
                 hiddenColumns: ["所持", "精霊名2", "その他", "id"],
             },
         },

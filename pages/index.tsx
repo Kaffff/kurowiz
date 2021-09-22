@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import data from "../public/json/kurowiz.json";
 import { Container } from "@chakra-ui/react";
 import TableContainer from "../components/TableContainer";
-import SelectColumnFilter from "../components/filters/SelectColumnFilter";
 
 const Home: React.FC = () => {
     const columns = useMemo(
@@ -14,8 +13,6 @@ const Home: React.FC = () => {
             {
                 Header: "属性",
                 accessor: "属性",
-                Filter: SelectColumnFilter,
-                filter: "includes",
             },
             {
                 Header: "AS",
