@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { Fragment, useState } from "react";
+import React, { cloneElement, Fragment, useState } from "react";
 import {
     useTable,
     useSortBy,
@@ -163,7 +163,7 @@ const TableContainer = ({ columns, data }) => {
 
                 <Container>
                     <Select value={pageSize} onChange={onChangeInSelect}>
-                        {[10, 20, 30, 40, 50].map((pageSize) => (
+                        {[10, 20, 30, 40, 50, 100, 200, 300].map((pageSize) => (
                             <option key={pageSize} value={pageSize}>
                                 Show {pageSize}
                             </option>
