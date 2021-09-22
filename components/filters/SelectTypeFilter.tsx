@@ -8,7 +8,7 @@ const SelectTypeFilter: React.FC<{ column: any }> = ({
         <Select
             size="xs"
             marginTop="0.5"
-            marginLeft="-3"
+            marginLeft="-1"
             placeholder="選択"
             onChange={(e: any) => {
                 setFilter(e.target.value || undefined);

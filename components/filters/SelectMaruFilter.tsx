@@ -9,8 +9,8 @@ const SelectMaruFilter: React.FC<{ column: any }> = ({
         <Button
             size="xs"
             marginTop="0.5"
-            paddingLeft="7"
-            paddingRight="7"
+            paddingLeft="4"
+            paddingRight="4"
             onClick={() => {
                 isClick ? setFilter("") : setFilter("〇");
                 setIsClick(!isClick);

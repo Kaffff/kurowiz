@@ -15,6 +15,7 @@ import {
     Select,
     Th,
     Tr,
+    Td,
     Thead,
     Tbody,
     Flex,
@@ -79,7 +80,7 @@ const TableContainer = ({ columns, data }) => {
 
     return (
         <Fragment>
-            <Table overflow="scroll" {...getTableProps()}>
+            <Table variant="striped" overflow="scroll" {...getTableProps()}>
                 <Thead>
                     {headerGroups.map((headerGroup) => (
                         // eslint-disable-next-line react/jsx-key
@@ -109,9 +110,9 @@ const TableContainer = ({ columns, data }) => {
                                 {row.cells.map((cell) => {
                                     return (
                                         // eslint-disable-next-line react/jsx-key
-                                        <td {...cell.getCellProps()}>
+                                        <Td {...cell.getCellProps()} h="85">
                                             {cell.render("Cell")}
-                                        </td>
+                                        </Td>
                                     );
                                 })}
                             </Tr>
