@@ -1,16 +1,12 @@
 import { Input } from "@chakra-ui/react";
-import { Column } from "react-table";
 
 const DefaultColumnFilter: React.FC<{ column: any }> = ({
-    column: {
-        filterValue,
-        setFilter,
-        preFilteredRows: { length },
-    },
+    column: { filterValue, setFilter },
 }) => {
     return (
         <Input
             size="xs"
+            marginTop="0.5"
             marginLeft="-3"
             value={filterValue || ""}
             onChange={(e) => {

@@ -12,20 +12,13 @@ import {
     Table,
     Container,
     Button,
-    NumberInput,
     Select,
     Th,
     Tr,
-    Td,
     Thead,
     Tbody,
     Flex,
     Text,
-    HStack,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import DefaultColumnFilter from "./filters/DefaultColumnFilter";
@@ -37,7 +30,6 @@ const TableContainer = ({ columns, data }) => {
         headerGroups,
         page,
         prepareRow,
-        visibleColumns,
         canPreviousPage,
         canNextPage,
         pageOptions,
@@ -99,7 +91,11 @@ const TableContainer = ({ columns, data }) => {
                                         {column.render("Header")}
                                         {generateSortingIndicator(column)}
                                     </div>
-                                    <DefaultColumnFilter column={column} />
+                                    <div>
+                                        {column.canFilter
+                                            ? column.render("Filter")
+                                            : null}
+                                    </div>
                                 </Th>
                             ))}
                         </Tr>

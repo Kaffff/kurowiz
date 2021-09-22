@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import data from "../public/json/kurowiz.json";
 import { Container } from "@chakra-ui/react";
 import TableContainer from "../components/TableContainer";
+import SelectTypeFilter from "../components/filters/SelectTypeFilter";
+import SelectMaruFilter from "../components/filters/SelectMaruFilter";
 
 const Home: React.FC = () => {
     const columns = useMemo(
@@ -13,6 +15,7 @@ const Home: React.FC = () => {
             {
                 Header: "属性",
                 accessor: "属性",
+                Filter: SelectTypeFilter,
             },
             {
                 Header: "AS",
@@ -49,26 +52,32 @@ const Home: React.FC = () => {
             {
                 Header: "貫通(ガード)",
                 accessor: "貫通(ガード)",
+                Filter: SelectMaruFilter,
             },
             {
                 Header: "貫通(ダメブロ)",
                 accessor: "貫通(ダメブロ)",
+                Filter: SelectMaruFilter,
             },
             {
                 Header: "貫通(属性吸収)",
                 accessor: "貫通(属性吸収)",
+                Filter: SelectMaruFilter,
             },
             {
                 Header: "貫通(バリアウォール)",
                 accessor: "貫通(バリアウォール)",
+                Filter: SelectMaruFilter,
             },
             {
                 Header: "貫通(多層)",
                 accessor: "貫通(多層)",
+                Filter: SelectMaruFilter,
             },
             {
                 Header: "貫通(属性免疫)",
                 accessor: "貫通(属性免疫)",
+                Filter: SelectMaruFilter,
             },
             {
                 Header: "精霊名2",
