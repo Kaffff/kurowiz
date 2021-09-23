@@ -80,90 +80,120 @@ const TableContainer = ({ columns, data }) => {
 
     return (
         <Fragment>
-            <Table variant="striped" overflow="scroll" {...getTableProps()}>
-                <Thead>
-                    {headerGroups.map((headerGroup) => (
-                        // eslint-disable-next-line react/jsx-key
-                        <Tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <Th {...column.getHeaderProps()}>
-                                    <div {...column.getSortByToggleProps()}>
-                                        {column.render("Header")}
-                                        {generateSortingIndicator(column)}
-                                    </div>
-                                    <div>
-                                        {column.canFilter
-                                            ? column.render("Filter")
-                                            : null}
-                                    </div>
-                                </Th>
-                            ))}
-                        </Tr>
-                    ))}
-                </Thead>
-                <Tbody {...getTableBodyProps()}>
-                    {page.map((row) => {
-                        prepareRow(row);
-                        return (
-                            <Tr key={row.getRowProps().key}>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        // eslint-disable-next-line react/jsx-key
-                                        <Td {...cell.getCellProps()} h="85">
-                                            {cell.render("Cell")}
-                                        </Td>
-                                    );
-                                })}
+            <Container
+                overflowY="hidden"
+                overflowX="scroll"
+                w="100vw"
+                maxW="100vw"
+                padding="0"
+                margin="0"
+            >
+                <Table
+                    w="100vw"
+                    maxW="100vw"
+                    padding="0"
+                    margin="0"
+                    variant="striped"
+                    {...getTableProps()}
+                >
+                    <Thead>
+                        {headerGroups.map((headerGroup) => (
+                            // eslint-disable-next-line react/jsx-key
+                            <Tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <Th {...column.getHeaderProps()}>
+                                        <div {...column.getSortByToggleProps()}>
+                                            {column.render("Header")}
+                                            {generateSortingIndicator(column)}
+                                        </div>
+                                        <div>
+                                            {column.canFilter
+                                                ? column.render("Filter")
+                                                : null}
+                                        </div>
+                                    </Th>
+                                ))}
                             </Tr>
-                        );
-                    })}
-                </Tbody>
-            </Table>
-
-            <Flex marginTop="2" marginBottom="30">
-                <Flex>
+                        ))}
+                    </Thead>
+                    <Tbody {...getTableBodyProps()}>
+                        {page.map((row) => {
+                            prepareRow(row);
+                            return (
+                                <Tr key={row.getRowProps().key}>
+                                    {row.cells.map((cell) => {
+                                        return (
+                                            // eslint-disable-next-line react/jsx-key
+                                            <Td {...cell.getCellProps()} h="85">
+                                                {cell.render("Cell")}
+                                            </Td>
+                                        );
+                                    })}
+                                </Tr>
+                            );
+                        })}
+                    </Tbody>
+                </Table>
+            </Container>
+            <Flex
+                marginTop="2"
+                marginBottom="30"
+                w="100vw"
+                maxW="100vw"
+                padding="0"
+                alignContent="space-between"
+            >
+                <Container marginTop="4" w="1/3">
+                    <Text fontSize="lg">
+                        Page {pageIndex + 1} of {pageOptions.length}
+                    </Text>
+                </Container>
+                <Flex w="1/3">
                     <Button
                         color="primary"
+                        size="lg"
                         onClick={() => gotoPage(0)}
                         disabled={!canPreviousPage}
-                        margin="1"
+                        margin="2"
                     >
                         {"<<"}
                     </Button>
                     <Button
                         color="primary"
+                        size="lg"
                         onClick={previousPage}
                         disabled={!canPreviousPage}
-                        margin="1"
+                        margin="2"
                     >
                         {"<"}
                     </Button>
                     <Button
                         color="primary"
+                        size="lg"
                         onClick={nextPage}
                         disabled={!canNextPage}
-                        margin="1"
+                        margin="2"
                     >
                         {">"}
                     </Button>
                     <Button
                         color="primary"
+                        size="lg"
                         onClick={() => gotoPage(pageCount - 1)}
                         disabled={!canNextPage}
-                        margin="1"
+                        margin="2"
                     >
                         {">>"}
                     </Button>
                 </Flex>
-                <Container marginTop="2">
-                    <Text fontSize="lg">
-                        Page {pageIndex + 1} of {pageOptions.length}
-                    </Text>
-                </Container>
 
-                <Container>
-                    <Select value={pageSize} onChange={onChangeInSelect}>
+                <Container w="1/3">
+                    <Select
+                        size="lg"
+                        value={pageSize}
+                        onChange={onChangeInSelect}
+                    >
                         {[10, 20, 30, 40, 50, 100, 200, 300].map((pageSize) => (
                             <option key={pageSize} value={pageSize}>
                                 Show {pageSize}

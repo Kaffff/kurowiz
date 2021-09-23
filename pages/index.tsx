@@ -111,7 +111,7 @@ const Home: React.FC = () => {
     );
 
     return (
-        <Container marginTop="5" maxW="max-content">
+        <Container margin="0" marginTop="5" w="100vw" maxW="100vw">
             <TableContainer columns={columns} data={data} />
         </Container>
     );
