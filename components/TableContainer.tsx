@@ -20,11 +20,13 @@ import {
     Tbody,
     Flex,
     Text,
+    useMediaQuery,
 } from "@chakra-ui/react";
-import { TriangleUpIcon, TriangleDownIcon } from "@chakra-ui/icons";
+import { ChevronUpIcon, ChevronDownIcon, UpDownIcon } from "@chakra-ui/icons";
 import DefaultColumnFilter from "./filters/DefaultColumnFilter";
 
 const TableContainer = ({ columns, data }) => {
+    const [isSmallerThan580] = useMediaQuery("(max-width: 580px)");
     const {
         getTableProps,
         getTableBodyProps,
@@ -60,12 +62,12 @@ const TableContainer = ({ columns, data }) => {
     const generateSortingIndicator = (column) => {
         return column.isSorted ? (
             column.isSortedDesc ? (
-                <TriangleDownIcon />
+                <ChevronDownIcon boxSize="3" marginBottom="1px" />
             ) : (
-                <TriangleUpIcon />
+                <ChevronUpIcon boxSize="3" marginBottom="1px" />
             )
         ) : (
-            ""
+            <UpDownIcon boxSize="2" marginLeft="2px" marginBottom="0.5" />
         );
     };
 
@@ -86,16 +88,8 @@ const TableContainer = ({ columns, data }) => {
                 w="100vw"
                 maxW="100vw"
                 padding="0"
-                margin="0"
             >
-                <Table
-                    w="100vw"
-                    maxW="100vw"
-                    padding="0"
-                    margin="0"
-                    variant="striped"
-                    {...getTableProps()}
-                >
+                <Table variant="striped" {...getTableProps()}>
                     <Thead>
                         {headerGroups.map((headerGroup) => (
                             // eslint-disable-next-line react/jsx-key
@@ -125,7 +119,19 @@ const TableContainer = ({ columns, data }) => {
                                     {row.cells.map((cell) => {
                                         return (
                                             // eslint-disable-next-line react/jsx-key
-                                            <Td {...cell.getCellProps()} h="85">
+                                            <Td
+                                                {...cell.getCellProps()}
+                                                h={
+                                                    isSmallerThan580
+                                                        ? "70"
+                                                        : "85"
+                                                }
+                                                fontSize={
+                                                    isSmallerThan580
+                                                        ? "xs"
+                                                        : "md"
+                                                }
+                                            >
                                                 {cell.render("Cell")}
                                             </Td>
                                         );
@@ -140,67 +146,72 @@ const TableContainer = ({ columns, data }) => {
                 marginTop="2"
                 marginBottom="30"
                 w="100vw"
+                minW="100vw"
                 maxW="100vw"
                 padding="0"
-                alignContent="space-between"
+                justify="space-between"
+                align="center"
             >
-                <Container marginTop="4" w="1/3">
-                    <Text fontSize="lg">
-                        Page {pageIndex + 1} of {pageOptions.length}
-                    </Text>
-                </Container>
+                <Text
+                    fontSize={isSmallerThan580 ? "sm" : "md"}
+                    marginRight="5"
+                    w="1/3"
+                >
+                    {isSmallerThan580
+                        ? `${pageIndex + 1}/${pageOptions.length}`
+                        : `Page ${pageIndex + 1} of ${pageOptions.length}`}
+                </Text>
                 <Flex w="1/3">
                     <Button
                         color="primary"
-                        size="lg"
+                        size={isSmallerThan580 ? "md" : "lg"}
                         onClick={() => gotoPage(0)}
                         disabled={!canPreviousPage}
-                        margin="2"
+                        margin={isSmallerThan580 ? "1" : "2"}
                     >
                         {"<<"}
                     </Button>
                     <Button
                         color="primary"
-                        size="lg"
+                        size={isSmallerThan580 ? "md" : "lg"}
                         onClick={previousPage}
                         disabled={!canPreviousPage}
-                        margin="2"
+                        margin={isSmallerThan580 ? "1" : "2"}
                     >
                         {"<"}
                     </Button>
                     <Button
                         color="primary"
-                        size="lg"
+                        size={isSmallerThan580 ? "md" : "lg"}
                         onClick={nextPage}
                         disabled={!canNextPage}
-                        margin="2"
+                        margin={isSmallerThan580 ? "1" : "2"}
                     >
                         {">"}
                     </Button>
                     <Button
                         color="primary"
-                        size="lg"
+                        size={isSmallerThan580 ? "md" : "lg"}
                         onClick={() => gotoPage(pageCount - 1)}
                         disabled={!canNextPage}
-                        margin="2"
+                        margin={isSmallerThan580 ? "1" : "2"}
                     >
                         {">>"}
                     </Button>
                 </Flex>
 
-                <Container w="1/3">
-                    <Select
-                        size="lg"
-                        value={pageSize}
-                        onChange={onChangeInSelect}
-                    >
-                        {[10, 20, 30, 40, 50, 100, 200, 300].map((pageSize) => (
-                            <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
-                            </option>
-                        ))}
-                    </Select>
-                </Container>
+                <Select
+                    size={isSmallerThan580 ? "sm" : "md"}
+                    value={pageSize}
+                    onChange={onChangeInSelect}
+                    w="1/3"
+                >
+                    {[10, 20, 30, 40, 50, 100, 200, 300].map((pageSize) => (
+                        <option key={pageSize} value={pageSize}>
+                            {isSmallerThan580 ? pageSize : `Show ${pageSize}`}
+                        </option>
+                    ))}
+                </Select>
             </Flex>
         </Fragment>
     );
