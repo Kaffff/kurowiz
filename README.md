@@ -4,7 +4,7 @@
 黒ウィズの魔道杯用のデータベースサイト
 
 ## DEMO
-kurowiz-database.vercel.app
+https://kurowiz-database.vercel.app
 
 ## Components
 - Next.js
